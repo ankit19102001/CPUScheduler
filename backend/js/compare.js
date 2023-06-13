@@ -22,7 +22,10 @@ var mainOutput = new Output();
 var processTotal;
 var Selectedalgorithm;
 var tq;
-
+var minWaitingTime = Number.MAX_SAFE_INTEGER;
+var minTurnaroundTime = Number.MAX_SAFE_INTEGER;
+var minWaitingAlgorithm = "";
+var minTurnaroundAlgorithm = "";
 
 $(document).ready(function() {
 
@@ -351,6 +354,16 @@ $(document).ready(function() {
             // Run the selected algorithm
             runAlgorithm(algorithm);
         }
+
+        console.log("Turn " + minTurnaroundAlgorithm + " " + minTurnaroundTime);
+        console.log("Wat " + minWaitingAlgorithm + " " + minWaitingTime);
+
+
+
+        $("#minWaitingAlgorithm").text(minWaitingAlgorithm);
+
+        // Display the algorithm with the least average turnaround time
+        $("#minTurnaroundAlgorithm").text(minTurnaroundAlgorithm);
     });
 
     // Function to run a specific algorithm
@@ -455,6 +468,7 @@ $(document).ready(function() {
                 .appendTo(tableHead);
         }
 
+
         // Iterate over the averageWaitingTimes and averageTurnaroundTimes lists
         for (let i = 0; i < averageWaitingTimes.length; i++) {
             var avgWaitingTime = averageWaitingTimes[i];
@@ -471,6 +485,17 @@ $(document).ready(function() {
 
             // Append the row to the table body
             tableBody.append(row);
+
+            if (avgWaitingTime < minWaitingTime) {
+                minWaitingTime = avgWaitingTime;
+                minWaitingAlgorithm = algorithmName;
+            }
+
+            // Check if the current algorithm has the least average turnaround time
+            if (avgTurnaroundTime < minTurnaroundTime) {
+                minTurnaroundTime = avgTurnaroundTime;
+                minTurnaroundAlgorithm = algorithmName;
+            }
         }
     }
     // }

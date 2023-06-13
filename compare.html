@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="backend/css/bootstrap-simplex.css">
     <!-- <link rel="stylesheet" type="text/css" href="backend/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" type="text/css" href="/backend/css/cpu-scheduler.css">
+    <link rel="stylesheet" type="text/css" href="backend/css/cpu-scheduler.css">
 
 
 
@@ -236,7 +236,7 @@
                 <div class="col-md-6">
                     <div style="display: block; text-align: center;">
                         <p>Click on the Compare button to show the Comparision Table</p>
-                        <button id="runBtn" class="compareButton">Compare</button>
+                        <button id="runBtn" class="compareButton" onclick="disp();">Compare</button>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -249,12 +249,19 @@
         </div>
 
 
-        <table class="table table-condensed text-center fs-3" id="outputTable" style="margin: 50px 0px;">
-            <tbody></tbody>
-        </table>
+        <div id="show" style="display: none;">
+            <table class="table table-condensed text-center fs-3" id="outputTable" style="margin: 50px 0px;">
+                <tbody></tbody>
+            </table>
+
+            <h2 class="fs-2 fw-bold" style="color: black;">Algorithm with the least average waiting time: <span id="minWaitingAlgorithm"></span></h2>
+            <h2 class="fs-2 fw-bold" style="color: black;">Algorithm with the least average turnaround time: <span id="minTurnaroundAlgorithm"></span></h2>
+        </div>
 
 
 
+
+        <!-- <script src="js/new.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -263,6 +270,11 @@
 
 
         <script>
+            function disp() {
+                document.getElementById("show").style = "display:block";
+            }
+
+
             var navLinks = document.getElementById("navLinks");
 
             function showMenu() {
